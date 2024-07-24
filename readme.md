@@ -94,8 +94,8 @@ Benefits of using an ORM allow developers to connect the application with the SQ
 - Password = String, Not Null
 - DateOfBirth = Integer
 - Gender = String
-- Height = Integer, Not Null
-- Weight = Intger, Not Null
+- Height = Float, Not Null
+- Weight = Float, Not Null
 
 #### Associations
 
@@ -109,9 +109,9 @@ Benefits of using an ORM allow developers to connect the application with the SQ
 
 - Meal_id = Integer, Primary Key
 - UserID = Integer, Foreign Key & Not Null
-- MealTime = Integer (date when meal was eaten) 
-- TotalProtein = Integer
-- Total Calories = Integer 
+- MealTime = Date (date when meal was eaten) 
+- TotalProtein = Float
+- Total Calories = Float
 
 #### Associations 
 
@@ -140,8 +140,8 @@ Benefits of using an ORM allow developers to connect the application with the SQ
 
 - Food_item_id = Integer, Primary Key
 - Name = String, Not Null
-- Protein Content = Integer
-- Calorie Content = Integer
+- Protein Content = Float
+- Calorie Content = Float
 - Serving Size = Integer
 
 
