@@ -5,6 +5,7 @@ class Meal(db.Model):
     __tablename__ = "meals"
 
     meal_id = db.Column(db.Integer, primary_key=True)
+    movie_title = db.Cloumn(db.String, unqiue=True)
     meal_time = db.Column(db.Date) # When it was eaten
     total_protein = db.Column(db.Float, nullable=False)
     total_calorie = db.Column(db.Float, nullable=False)
