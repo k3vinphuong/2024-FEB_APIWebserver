@@ -7,11 +7,10 @@ class User(db.Model):
     username = db.Column(db.String)
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable = False)
-    dateofbirth = db.Column(db.Integer)
+    date_of_birth = db.Column(db.Date)
     gender = db.Column(db.String)
-    height = db.Column(db.Integer, nullable = False)
-    weight = db.Cloumn(db.Integer, nullable = False)
-    is_admin = db.Column(db.Boolean, default = False)
+    height = db.Column(db.Float, nullable = False)
+    weight = db.Cloumn(db.Float, nullable = False)
     
 class UserSchema(ma.Schema):
     class Meta:
