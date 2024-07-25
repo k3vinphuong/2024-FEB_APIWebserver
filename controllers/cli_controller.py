@@ -5,6 +5,7 @@ from flask import Blueprint
 from init import db, bcrypt
 from models.user import User
 from models.meal import Meal
+from models.mealitem import Mealitem
 
 db_commands = Blueprint("db", __name__)
 
@@ -71,8 +72,10 @@ def seed_tables():
            total_calorie="749kcal", 
         ),
     ]
-
     db.session.add_all(meals)
+
+    
+
     db.session.commit()
 
     print("Tables seeded")

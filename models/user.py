@@ -23,7 +23,7 @@ class User(db.Model):
 class UserSchema(ma.Schema):
     meals = fields.List(fields.Nested('MealSchema', exclude=["user"]))
     class Meta:
-        fields = ( "user_id", "username", "email", "password", "dateofbirth", "gender", "height", "weight", "is_admin", "meals" )
+        fields = ( "user_id", "username", "email", "password", "date_of_birth", "gender", "height", "weight", "is_admin", "meals", )
 
 # schema to handle one user
 user_schema = UserSchema(exclude=["password"])
