@@ -119,21 +119,6 @@ Benefits of using an ORM allow developers to connect the application with the SQ
 
 #### Table Name
 
-- MealItem
-
-#### Attributes
-
-- Meal_item_id = Integer, Primary Key
-- MealID = Integer, Foreign Key & Not Null
-- FoodItemID = Integer, Foreign Key & Not Null
-- Quantity = Integer
-
-#### Associations
-
-- One to Many with FoodItem: a mealitem has many food items, a food item belongs to one mealitem
-
-#### Table Name
-
 - FoodItem
 
 #### Attributes
