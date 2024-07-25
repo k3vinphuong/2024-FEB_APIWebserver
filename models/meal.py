@@ -12,14 +12,15 @@ class Meal(db.Model):
     
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
-    user = db.relationship('User', back_populates='meals')
+    user = db.relationship("User", back_populates="meals")
 
 class MealSchema(ma.Schema):
     
     user = fields.Nested('UserSchema', only=["id", "name", "email"])
-
+    
     class Meta:
         fields = ( "meal_id", "user", "meal_time", "total_protein", "total_calories" )
+        ordered = True
 
 meal_schema = MealSchema()
 meals_schema = MealSchema(many=True)
