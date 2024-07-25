@@ -5,8 +5,10 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from init import db
 from models.meal import Meal, meal_schema, meals_schema
+from controllers.food_item_controller import food_item_bp
 
 meals_bp = Blueprint("meals", __name__, url_prefix="/meals")
+meals_bp.register_blueprint(food_item_bp)
 
 @meals_bp.route("/")
 def get_all_meals():
