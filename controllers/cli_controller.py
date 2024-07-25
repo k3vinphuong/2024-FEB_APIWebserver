@@ -6,6 +6,7 @@ from init import db, bcrypt
 from models.user import User
 from models.meal import Meal
 from models.mealitem import Mealitem
+from models.fooditem import Fooditem
 
 db_commands = Blueprint("db", __name__)
 
@@ -74,7 +75,50 @@ def seed_tables():
     ]
     db.session.add_all(meals)
 
-    
+    food_items = [
+        Fooditem(
+            name="Banana",
+            protein_content="1g",
+            calorie_content="110cal",
+            serving_size="1",
+        ),
+
+        Fooditem(
+            name="Eggs",
+            protein_content="6.3g",
+            calorie_content="74cal",
+            serving_size="1",
+        ),
+
+        Fooditem(
+            name="Peanut Butter",
+            protein_content="8g",
+            calorie_content="190cal",
+            serving_size="2 tbsp",
+        ),
+
+        Fooditem(
+            name="Lobster",
+            protein_content="27g",
+            calorie_content="128cal",
+            serving_size="145g",
+        ),
+
+        Fooditem(
+            name="Australian Pork Sausage",
+            protein_content="10.2g",
+            calorie_content="134cal",
+            serving_size="75g",
+        ),
+
+        Fooditem(
+            name="French Toast",
+            protein_content="5g",
+            calorie_content="149cal",
+            serving_size="65g",
+        ),
+    ]
+    db.session.add_all(food_items)
 
     db.session.commit()
 
