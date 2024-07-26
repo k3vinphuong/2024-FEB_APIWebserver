@@ -5,7 +5,6 @@ from flask import Blueprint
 from init import db, bcrypt
 from models.user import User
 from models.meal import Meal
-from models.mealitem import Mealitem
 from models.fooditem import Fooditem
 
 db_commands = Blueprint("db", __name__)

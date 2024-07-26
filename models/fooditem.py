@@ -10,14 +10,15 @@ class Fooditem(db.Model):
     calorie_content = db.Column(db.Float, nullable=False)
     serving_size = db.Column(db.Integer)
 
-    mealitem = db.relationship("Mealitem", back_populates="fooditem")
+    meal_id = db.Column(db.Integer, db.ForeignKey("meals.id"), nullable=False)
 
-    class FoodItemSchema(ma.Schema):
-        
-        mealitem = fields.Nested("MealItemSchema", only=["quantity"])
+    meal = db.relationship("Meal", back_populates="food_items")
 
-        class Meta:
-            fields = ("food_item_id", "name", "protein_content", "calorie_content", "serving_size", "meal_item")
+class FoodItemSchema(ma.Schema):
 
-    food_item_schema = FoodItemSchema()
-    food_items_schema = FoodItemSchema(many=True)
+    class Meta:
+        fields = ("food_item_id", "name", "protein_content", "calorie_content", "serving_size", "meal")
+        ordered = True
+
+food_item_schema = FoodItemSchema()
+food_items_schema = FoodItemSchema(many=True)

@@ -41,7 +41,7 @@ def delete_food_item(meal_id, food_item_id):
     else:
         return {"error": f"Food item with id {food_item_id} not found"}, 404
     
-@food_item_bp.route("/<int:food_items_id", methods=["PUT", "PATCH"])
+@food_item_bp.route("/<int:food_items_id>", methods=["PUT", "PATCH"])
 @jwt_required()
 def edit_food_item(meal_id, food_item_id):
     body_data = request.get_json()

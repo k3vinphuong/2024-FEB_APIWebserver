@@ -1,11 +1,12 @@
 from init import db, ma
 from marshmallow import fields
+from marshmallow.validate import Regexp
 
 class User(db.Model):
     __tablename__ = "users"
 
     # structure of table, each column
-    user_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String)
     # email needs to be unique and cannot be null
     email = db.Column(db.String, nullable=False, unique=True)
@@ -22,6 +23,11 @@ class User(db.Model):
 # user schema, provided by marshmallow
 class UserSchema(ma.Schema):
     meals = fields.List(fields.Nested('MealSchema', exclude=["user"]))
+
+    email = fields.String(required=True, validate=Regexp("^\S+@\S+\.\S+$", error="Invalid Email Format"))
+
+    password = fields.String(required=True, validate=Regexp("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", error="Minimum eight characters, at least one letter and one number"))
+    
     class Meta:
         fields = ( "user_id", "username", "email", "password", "date_of_birth", "gender", "height", "weight", "is_admin", "meals", )
 
