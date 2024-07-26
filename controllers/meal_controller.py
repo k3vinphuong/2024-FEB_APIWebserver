@@ -28,13 +28,13 @@ def get_one_meal(meal_id):
 @meals_bp.route("/", methods=["POST"])
 @jwt_required()
 def create_meal():
-    body_data = request.get_json()
+    body_data = meal_schema.load(request.get_json())
     # Create a new meal model instance
     meal = Meal(
-        title=body_data.get("movie_title"),
-        time=date.today(),
-        protein=body_data.get("total_protein"),
-        calorie=body_data.get("total_calorie"),
+        meal_name=body_data.get("meal_name"),
+        meal_time=date.today(),
+        total_protein=body_data.get("total_protein"),
+        total_calorie=body_data.get("total_calorie"),
         user_id=get_jwt_identity()
     )
     # add that to the session and commit
@@ -66,7 +66,7 @@ def delete_meal(meal_id):
 @jwt_required()
 def update_meal(meal_id):
     # Get the data to be updated from body of request
-    body_data = request.get_json
+    body_data = meal_schema.load(request.get_json())
     # get the meal from the DB whose field needs to be update
     stmt = db.select(Meal).filter_by(id=meal_id)
     meal = db.session.scalar(stmt)
@@ -84,5 +84,5 @@ def update_meal(meal_id):
     # else
     else:
         # return error message
-        return {"error": f"Movie with id {"movie_id"} not found"}
+        return {"error": f"Meal with id {meal_id} not found"}
     

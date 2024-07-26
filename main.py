@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from marshmallow.exceptions import ValidationError
 
 from init import db, ma, bcrypt, jwt
 
@@ -18,6 +19,10 @@ def create_app():
     bcrypt.init_app(app)
     jwt.init_app(app)
 
+    @app.errorhandler(ValidationError)
+    def validation_error(err):
+        return {"error": err.message}, 400
+
     from controllers.cli_controller import db_commands
     app.register_blueprint(db_commands)
     
@@ -26,5 +31,8 @@ def create_app():
 
     from controllers.meal_controller import meals_bp
     app.register_blueprint(meals_bp)
+    
+    from controllers.food_item_controller import food_item_bp
+    app.register_blueprint(food_item_bp)
 
     return app
