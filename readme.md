@@ -79,7 +79,7 @@ Benefits of using an ORM allow developers to connect the application with the SQ
 
 ## Design an entity relationship diagram (ERD) for this app's databse, and explain how the relations between the diagrammed models will aid the database design.
 
-![ERD DIagram](./docs/Proteing_Tracker_ERD.drawio.png)
+![ERD DIagram](./docs/ProteinCalorieTracker.drawio.png)
 
 ### User Model
 

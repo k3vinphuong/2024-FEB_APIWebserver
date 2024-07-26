@@ -6,6 +6,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from init import db
 from models.meal import Meal, meal_schema, meals_schema
 from controllers.food_item_controller import food_item_bp
+from utils import authorise_as_admin
 
 meals_bp = Blueprint("meals", __name__, url_prefix="/meals")
 meals_bp.register_blueprint(food_item_bp)
@@ -47,6 +48,11 @@ def create_meal():
 @meals_bp.route("/<int:meal_id>", methods=["DELETE"])
 @jwt_required()
 def delete_meal(meal_id):
+    # check if user is admin
+    is_admin = authorise_as_admin()
+    if not is_admin:
+        return {"error": "User is not authorised to perform this action."}, 403
+    
     # get the meal from the DB
     stmt = db.select(Meal).filter_by(id=meal_id)
     meal = db.session.scalar(stmt)
@@ -72,8 +78,12 @@ def update_meal(meal_id):
     meal = db.session.scalar(stmt)
    # if meal exists
     if meal:
+        # if user is owner of meal
+        if meal.user_id != get_jwt_identity():
+            return {"error": "You are not the owner"}, 403
         # update the fields as required
-        meal.title = body_data.get("title") or meal.title
+        meal.name = body_data.get("meal_name") or meal.name
+        meal.time = body_data.get("meal_time") or meal.time
         meal.total_protein = body_data.get("total_protein") or meal.total_protein
         meal.total_calorie = body_data.get("total_calorie") or meal.total_calorie
         
@@ -85,4 +95,3 @@ def update_meal(meal_id):
     else:
         # return error message
         return {"error": f"Meal with id {meal_id} not found"}
-    
