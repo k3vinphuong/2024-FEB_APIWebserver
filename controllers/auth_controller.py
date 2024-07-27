@@ -22,7 +22,7 @@ def register_user():
             username=body_data.get("username"),
             email=body_data.get("email"),
             height=body_data.get("height"),
-            weight=body_data.get("weight"),
+            weight=body_data.get("weight")
         )
         
         # password from request body
@@ -78,7 +78,7 @@ def update_user(user_id):
         db.session.commit()
         return user_schema.dump(user)
     else:
-        return {"error": "user does not exist"}
+        return {"error": "user does not exist"}, 404
     
 @auth_bp.route("/users/<int:user_id>", methods=["DELETE"])
 @jwt_required()

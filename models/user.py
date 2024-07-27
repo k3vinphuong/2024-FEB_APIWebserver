@@ -13,8 +13,8 @@ class User(db.Model):
     password = db.Column(db.String, nullable = False)
     date_of_birth = db.Column(db.Date)
     gender = db.Column(db.String)
-    height = db.Column(db.Float, nullable = False)
-    weight = db.Column(db.Float, nullable = False)
+    height = db.Column(db.Float)
+    weight = db.Column(db.Float)
     # by default users are not admins
     is_admin = db.Column(db.Boolean, default=False)
     

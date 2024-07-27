@@ -48,7 +48,10 @@ def edit_food_item(meal_id, food_item_id):
     stmt = db.select(Fooditem).filter_by(id=food_item_id)
     food_item = db.session.scalar(stmt)
     if food_item:
-        food_item.message - body_data.get("message") or food_item.message
+        food_item.food_item_name = body_data.get("food_item_name") or food_item.food_item_name
+        food_item.protein_content = body_data.get("protein_content") or food_item.protein_content
+        food_item.calorie_content = body_data.get("calorie_content") or food_item.calorie_content
+        food_item.serving_size = body_data.get("serving_size") or food_item.serving_size
         db.session.commit()
         return food_item_schema.dump(food_item)
     else:
