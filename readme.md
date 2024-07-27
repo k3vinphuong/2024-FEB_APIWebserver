@@ -131,13 +131,13 @@ Benefits of using an ORM allow developers to connect the application with the SQ
 
 ---
 
-## Exaplin the implemented models and their relationships, including how the relationships aid the database implementation.
+## Explain the implemented models and their relationships, including how the relationships aid the database implementation.
 
 ### User Model
 
 The user model represents a user in the system. The user model has a relationship with the meals model through a one to many relationship and is connected through the foreign key of 'user_id" in the meals model. This means that for every one user they can have many meals. 
 
-'''py
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String)
     email = db.Column(db.String, nullable=False, unique=True)
@@ -149,5 +149,5 @@ The user model represents a user in the system. The user model has a relationshi
     is_admin = db.Column(db.Boolean, default=False)
     
     meals = db.relationship('Meal', back_populates="user")
-'''
+
 
